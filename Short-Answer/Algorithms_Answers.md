@@ -26,4 +26,12 @@ For every n that is added, the function is executing 1 more time.  It decrements
 
 ## Exercise II
 
+This is a good use case for binary search.
 
+We can start by going to the halfway point of the building `n // 2`
+
+If the egg breaks dropping form n // 2, we can half that number again.  In other words n // 2 will now be the new "top" of the building. 
+
+If the egg doesn't break for some reason, `n // 2` will be our new "bottom". 
+
+We will repeat this process until we find the floor that the egg doesn't break on.  
