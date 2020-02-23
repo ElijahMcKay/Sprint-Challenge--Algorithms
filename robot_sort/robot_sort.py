@@ -96,9 +96,49 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        # Plan:  this is basically just going to be a bubble sort with while loops
+        while True:
+            # light off = not sorted
+            self.set_light_off()
 
+            # we are always going to be holding None, so it doesn't end up in the list
+
+            # moving right until we can't anymore, iterating over the entire list
+            while self.can_move_right():
+                # picking up item and then moving right to compare
+                self.swap_item()
+                self.move_right()
+
+                # if we find an item smaller than ours, we swap
+                if self.compare_item() == 1:
+                    self.swap_item()
+
+                # take the current item (which had a lesser value than previous item), move left, and swap
+                self.move_left()
+                self.swap_item()
+                # move right, and start the comparison loop over again
+                self.move_right()
+
+            # once we reach the end of the list, going to repeat the same process in reverse 
+            while self.can_move_left():
+                self.swap_item()
+                self.move_left()
+
+                # if the held item is less than the current item, swap them
+                if self.compare_item() == -1:
+                    self.swap_item()
+                    # after we make the last comparison and the array is sorted, this light won't be set on anymore (this is the condition so we can end the loop)
+                    self.set_light_on()
+
+                # take the current item (which had a greater value), move right, and swap them
+                self.move_right()
+                self.swap_item()
+                # move left, and start the comparison loop over again 
+                self.move_left()
+
+            # break loop
+            if self.light_is_on() is False:
+                return
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
